@@ -41,7 +41,7 @@ class MergeSort(SortingAlgorithm):
             right_half = data[mid:]
 
             self.sort(left_half, key, reverse)
-            self.sort(right_half, key, reverse)
+            self.sort(right_half, key, reverse) fkwqhdzoiözwehIOÖHFDWGwwiuwe
 
             i = j = k = 0
 
