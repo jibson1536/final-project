@@ -1,209 +1,42 @@
-import csv
+import csv  # Ensure you import the csv module
+from data_loader import load_data, validate_row
+from filters import filter_hotels
+from sorters import sort_hotels
+from utilities import format_display
 
-class User:
-    def __init__(self, username, password):
-        self.username = username
-        self.password = password
-class Song:
-    def __init__(self, title, artist):
-        self.title = title
-        self.artist = artist
+class HotelBookingSystem:
+    def __init__(self, data_file):  # Constructor with correct initialization
+        self.data_file = data_file
+        self.data = []  # Initialize an empty list to store hotel data
+        self.load_data()  # Load the data when the class is initialized
 
-        pass
-    def __str__(self):
-        return f"{self.title} by {self.artist}"
-
-class Playlist:
-    pass
-  
-class Favorites:
-    def __init__(self):
-        self.favorite_songs = []
-
-    def add_to_favorites(self, song):
-        self.favorite_songs.append(song)
-        print(f"{song} added to favorites.")
-
-    def remove_from_favorites(self, song):
-        if song in self.favorite_songs:
-            self.favorite_songs.remove(song)
-            print(f"{song} removed from favorites.")
-        else:
-            print(f"{song} is not in favorites.")
-
-
-
-class MusicApp:
-    def __init__(self):
-        self.users = []
-        self.current_user = None
-        self.songs_data = []
-        self.playlist = Playlist()
-
-    def read_users_data(self):
+    def load_data(self):
+        """Load and validate the CSV data."""
         try:
-            with open('users.csv', 'r') as users_file:
-                reader = csv.reader(users_file)
-                for row in reader:
-                    username, password = row
-                    self.users.append(User(username, password))
-
+            with open(self.data_file, mode='r') as file:  # Open the file in read mode
+                reader = csv.DictReader(file)  # Read the file as a dictionary
+                for row in reader:  # Loop through each row in the CSV file
+                    if self.validate_row(row):  # Validate the row data
+                        self.data.append(row)  # Add valid rows to the data list
+                    else:
+                        print(f"Invalid data skipped: {row}")  # Print invalid rows
         except FileNotFoundError:
-            print("File not found!")
+            print("Error: The specified data file does not exist.")
+        except Exception as e:
+            print(f"Unexpected error while loading data: {e}")
 
-    def write_users_data(self):
+    @staticmethod
+    def validate_row(row):
+        """Validate a row from the CSV file."""
+        required_fields = ["HotelName", "Price", "Rating", "Location"]
         try:
-            with open('users.csv', 'w') as users_file:
-                writer = csv.writer(users_file)
-                for user in self.users:
-                    writer.writerow([user.username, user.password])
-
-        except IOError:
-            print("Error writing to file!")
-
-    def register(self):
-        username = input("Enter a username: ")
-        password = input("Enter a password: ")
-
-        self.users.append(User(username, password))
-        self.write_users_data()
-
-    def login(self):
-        username = input("Enter your username: ")
-        password = input("Enter your password: ")
-
-        for user in self.users:
-            if user.username == username and user.password == password:
-                self.current_user = user
-                print(f"Logged in as {user.username}")
-                return
-
-        print("Invalid credentials.")
-
-    def read_data(self):
-        
-
-        def display_songs(self):
-            for song in self.songs_data:
-                print(song)
-
-        def search_songs(self, keyword):
-            results = [song for song in self.songs_data if keyword.lower() in song.title.lower()]
-            if results:
-                for result in results:
-                    print(result)
-            else:
-                print(f"No results found for '{keyword}'.")
-
-        
-        def display_favorites(self):
-            pass  
-
-    def add_song(self):
-        self.tittle 
-        pass  
-    
-
-    def create_playlist(self):
-        pass  
-
-    def play_song(self):
-        print("Playing song...")
-
-    def pause_song(self):
-        print("Pausing song...")
-
-    def stop_song(self):
-        print("Stopping song...")
-
-    def reshuffle_playlist(self):
-        print("Reshuffling playlist...")
-
-    def repeat_song(self):
-        print("Repeating song...")
-
-    def equalizer(self):
-        print("Adjusting Equalizer...")
-
-    def main_menu(self):
-        if not self.current_user:
-            print("\nPlease login or register.")
-            print("1. Register")
-            print("2. Login")
-            print("3. Exit")
-            print("Note: The application supports all types of music formats.")
-            return False
-        else:
-            print(f"\nWelcome, {self.current_user.username}!")
-            print("1. Display Songs")
-            print("2. Add Song")
-            print("3. Create Playlist")
-            print("4. Favorite")
-            print("5. Search song")
-            print("6. Exit")
-            print("7. Play")
-            print("8. Pause")
-            print("9. Stop")
-            print("10. Reshuffle Playlist")
-            print("11. Repeat")
-            print("12. EQ")
-            print("13. Logout")
-            print("Note: The application supports all types of music formats.")
-            return True
-
-    def main(self):
-        self.read_users_data()
-        self.read_data()
-
-        while True:
-            logged_in = self.main_menu()
-
-            if not logged_in:
-                choice = input("Enter your choice: ")
-                if choice == '1':
-                    self.register()
-                elif choice == '2':
-                    self.login()
-                elif choice == '3':
-                    print("Exiting...")
-                    break
-                else:
-                    print("Invalid choice!")
-            else:
-                choice = input("Enter your choice: ")
-                if choice == '1':
-                    self.display_songs()
-                elif choice == '2':
-                    self.add_song()
-                elif choice == '3':
-                    self.create_playlist()
-                elif choice == '4':
-                    self.current_user = None
-                    print("Logged out.")
-                elif choice == '5':
-                    print("Exiting...")
-                    break
-                elif choice == '6':
-                    self.play_song()
-                elif choice == '7':
-                    self.pause_song()
-                elif choice == '8':
-                    self.stop_song()
-                elif choice == '9':
-                    self.reshuffle_playlist()
-                elif choice == '10':
-                    self.repeat_song()
-                elif choice == '11':
-                    self.equalizer()
-                elif choice == '12':
-                    self.favorite()
-                elif choice == '13':
-                    self.search_songs()
-                    
-                
-                else:
-                    print("Invalid choice!")
-
-if __name__ == "__main__":
-    music_app = MusicApp()
-    music_app.main()
+            # Ensure each required field exists and has valid data
+            for field in required_fields:
+                if field not in row or not row[field].strip():
+                    return False  # If any field is missing or empty, return False
+            # Ensure Price is a number and Rating is between 1 and 5
+            if not row["Price"].isdigit() or not (1 <= int(row["Rating"]) <= 5):
+                return False
+            return True  # If all validations pass, return True
+        except Exception:
+            return False  # In case of any other errors, return False
