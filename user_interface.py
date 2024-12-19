@@ -1,29 +1,7 @@
+import time
 
-#### Group Member 1: Object-Oriented Design & Data Handling
-import csv
-from abc import ABC, abstractmethod
-
-# Core DataItem class
-class DataItem:
-    def __init__(self, hotel_id, name, location, price, rating, availability):
-        self.hotel_id = hotel_id
-        self.name = name
-        self.location = location
-        self.price = price
-        self.rating = rating
-        self.availability = availability
-
-    def __str__(self):
-        return f"{self.name} ({self.location}) - ${self.price}/night, Rating: {self.rating}, Available: {self.availability}"
-
-# Abstract SortingAlgorithm class
-class SortingAlgorithm(ABC):
-    @abstractmethod
-    def sort(self, data, key, reverse=False):
-        pass
-
-# BubbleSort class
-class BubbleSort(SortingAlgorithm):
+# Sorting Algorithms
+class BubbleSort:
     def sort(self, data, key, reverse=False):
         n = len(data)
         for i in range(n):
@@ -32,8 +10,7 @@ class BubbleSort(SortingAlgorithm):
                     data[j], data[j + 1] = data[j + 1], data[j]
         return data
 
-# MergeSort class
-class MergeSort(SortingAlgorithm):
+class MergeSort:
     def sort(self, data, key, reverse=False):
         if len(data) > 1:
             mid = len(data) // 2
@@ -41,7 +18,8 @@ class MergeSort(SortingAlgorithm):
             right_half = data[mid:]
 
             self.sort(left_half, key, reverse)
-            self.sort(right_half, key, reverse) fkwqhdzoiözwehIOÖHFDWGwwiuwe
+            
+            self.sort(right_half, key, reverse)
 
             i = j = k = 0
 
@@ -65,24 +43,7 @@ class MergeSort(SortingAlgorithm):
                 k += 1
         return data
 
-# DataHandler class for loading CSV data
-class DataHandler:
-    @staticmethod
-    def load_data(file_path):
-        data = []
-        try:
-            with open(file_path, mode='r') as file:
-                reader = csv.DictReader(file)
-                for row in reader:
-                    row['price'] = float(row['price'])
-                    row['rating'] = float(row['rating'])
-                    row['availability'] = row['availability'].lower() == 'true'
-                    data.append(row)
-        except Exception as e:
-            print(f"Error loading data: {e}")
-        return data
-
-### Group Member 2: Truth Table and Logical Complexity
+# Truth Table Evaluator
 class TruthTableEvaluator:
     @staticmethod
     def evaluate(item, expression):
@@ -100,36 +61,34 @@ class TruthTableEvaluator:
                 filtered_data.append(item)
         return filtered_data
 
-    @staticmethod
-    def format_expression(expression):
-        # Ensure logical expression formatting for better evaluation
-        try:
-            formatted_expression = expression.replace('and', ' and ').replace('or', ' or ').replace('not', ' not ')
-            return formatted_expression
-        except Exception as e:
-            print(f"Error formatting expression: {e}")
-            return expression
-
+# Performance Analyzer
 class PerformanceAnalyzer:
     @staticmethod
-    def measure_time(func, *args):
-        import time
+    def measure_execution_time(sort_function, data, key, reverse):
         start_time = time.time()
-        result = func(*args)
+        sorted_data = sort_function(data, key, reverse)
         end_time = time.time()
         execution_time = end_time - start_time
         print(f"Execution Time: {execution_time:.4f} seconds")
-        return result
+        return sorted_data, execution_time
 
     @staticmethod
-    def compare_algorithms(data, sorting_algorithms, key):
-        for algorithm in sorting_algorithms:
-            print(f"Measuring performance of {algorithm.__class__.__name__}...")
-            PerformanceAnalyzer.measure_time(algorithm.sort, data.copy(), key)
+    def compare_algorithms(bubble_sort, merge_sort, data, key):
+        print("Comparing Performance of Bubble Sort and Merge Sort...")
+        print("Running Bubble Sort...")
+        bubble_sorted, bubble_time = PerformanceAnalyzer.measure_execution_time(bubble_sort.sort, data.copy(), key, False)
+        print("Running Merge Sort...")
+        merge_sorted, merge_time = PerformanceAnalyzer.measure_execution_time(merge_sort.sort, data.copy(), key, False)
+        if bubble_time < merge_time:
+            print(f"Bubble Sort is faster by {merge_time - bubble_time:.4f} seconds")
+        else:
+            print(f"Merge Sort is faster by {bubble_time - merge_time:.4f} seconds")
+        return bubble_sorted, merge_sorted
 
-### Group Member 3: User Interaction
+# User Interface
 class UserInterface:
     def __init__(self, data):
+        # Ensure data is a list of dictionaries with proper keys
         self.data = data
 
     def display_hotels(self):
@@ -147,30 +106,40 @@ class UserInterface:
         algorithm_choice = int(input("Enter your choice: "))
         sorting_algorithm = BubbleSort() if algorithm_choice == 1 else MergeSort()
 
-        self.data = PerformanceAnalyzer.measure_time(sorting_algorithm.sort, self.data, key, reverse)
+        # Measure execution time
+        start_time = time.time()
+        self.data = sorting_algorithm.sort(self.data, key, reverse)
+        end_time = time.time()
+
+        print(f"Sorting completed in {end_time - start_time:.4f} seconds")
         self.display_hotels()
 
     def filter_hotels(self):
         expression = input("Enter a truth table condition (e.g., 'price < 150 and rating > 4.0'): ")
-        expression = TruthTableEvaluator.format_expression(expression)
-        filtered_data = PerformanceAnalyzer.measure_time(TruthTableEvaluator.filter_data, self.data, expression)
+        filtered_data = TruthTableEvaluator.filter_data(self.data, expression)
         print("Filtered Hotels:")
         for hotel in filtered_data:
             print(f"{hotel['name']} ({hotel['location']}): ${hotel['price']}/night, Rating: {hotel['rating']}, Available: {hotel['availability']}")
 
-if __name__ == "__main__":
-    data_file = "hotels.csv"  # Replace with your CSV file path
-    data = DataHandler.load_data(data_file)
+    def compare_sorting_algorithms(self):
+        key = input("Enter sorting criterion (price/rating/availability): ")
+        bubble_sort = BubbleSort()
+        merge_sort = MergeSort()
+        PerformanceAnalyzer.compare_algorithms(bubble_sort, merge_sort, self.data, key)
 
-    if not data:
-        print("No data available. Please check the file.")
-        exit()
+if __name__ == "__main__":
+    # Sample data for testing
+    data = [
+        {'name': 'Hotel A', 'location': 'City X', 'price': 120, 'rating': 4.5, 'availability': True},
+        {'name': 'Hotel B', 'location': 'City Y', 'price': 100, 'rating': 4.0, 'availability': False},
+        {'name': 'Hotel C', 'location': 'City Z', 'price': 200, 'rating': 5.0, 'availability': True}
+    ]
 
     ui = UserInterface(data)
 
     while True:
         print("\nHotel Booking System")
-        print("1. View Hotels\n2. Sort Hotels\n3. Filter Hotels\n4. Exit")
+        print("1. View Hotels\n2. Sort Hotels\n3. Filter Hotels\n4. Compare Sorting Algorithms\n5. Exit")
         choice = int(input("Enter your choice: "))
 
         if choice == 1:
@@ -180,6 +149,8 @@ if __name__ == "__main__":
         elif choice == 3:
             ui.filter_hotels()
         elif choice == 4:
+            ui.compare_sorting_algorithms()
+        elif choice == 5:
             print("Exiting the system. Goodbye!")
             break
         else:
