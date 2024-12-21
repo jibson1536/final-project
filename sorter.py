@@ -1,7 +1,9 @@
-def sort_hotels(data, key, reverse=False):
-    """Sort hotels based on a given key."""
+def sort_hotels(data, keys, reverse=False):
+    """Sort hotels by multiple keys."""
     try:
-        return sorted(data, key=lambda x: x[key], reverse=reverse)
-    except KeyError:
-        print(f"Error: Cannot sort by {key}. Invalid field.")
+        for key in reversed(keys):  # Apply sorting for each key in reverse order
+            data = sorted(data, key=lambda x: x[key], reverse=reverse)
+        return data
+    except KeyError as e:
+        print(f"Error: Cannot sort by {e}. Invalid field.")
         return data
