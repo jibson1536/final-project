@@ -2,3 +2,9 @@ HotelName,Price,Rating,Location
 Hotel A,100,5,New York
 Hotel B,80,4,San Francisco
 Hotel C,120,3,Chicago
+hotel_id,name,price,rating,availability,location
+1,Hotel Sunshine,100.0,4.5,True,New York
+2,The Grand Plaza,250.0,5.0,False,Los Angeles
+3,Budget Inn,50.0,3.0,True,San Francisco
+4,Seaside Resort,200.0,4.0,True,Miami
+5,Mountain Lodge,150.0,4.2,True,Aspen
