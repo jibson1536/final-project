@@ -1,10 +1,21 @@
 HotelName,Price,Rating,Location
-Hotel A,100,5,New York
-Hotel B,80,4,San Francisco
-Hotel C,120,3,Chicago
-hotel_id,name,price,rating,availability,location
-1,Hotel Sunshine,100.0,4.5,True,New York
-2,The Grand Plaza,250.0,5.0,False,Los Angeles
-3,Budget Inn,50.0,3.0,True,San Francisco
-4,Seaside Resort,200.0,4.0,True,Miami
-5,Mountain Lodge,150.0,4.2,True,Aspen
+Hotel Sunshine,100.0,4.5,New York
+The Grand Plaza,250.0,5.0,Los Angeles
+Budget Inn,50.0,3.0,San Francisco
+Seaside Resort,200.0,4.0,Miami
+Mountain Lodge,150.0,4.2,Aspen
+Urban Stay,120.0,4.1,Chicago
+Royal Inn,300.0,5.0,Boston
+The Cozy Nook,75.0,3.5,Portland
+Luxury Haven,500.0,5.0,Las Vegas
+Beachside Escape,220.0,4.8,Honolulu
+The Hidden Gem,95.0,3.9,Austin
+Lakeview Retreat,180.0,4.4,Seattle
+The Green Stay,80.0,3.7,Denver
+City Central,140.0,4.3,Phoenix
+Sunset Inn,60.0,3.2,San Diego
+Downtown Suites,230.0,4.7,Houston
+The Comfort Zone,110.0,4.0,Philadelphia
+Riverside Hotel,125.0,4.1,Atlanta
+The Modern Stay,210.0,4.6,Dallas
+The Grand Escape,400.0,5.0,Orlando
