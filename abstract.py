@@ -31,4 +31,11 @@ class SingleApartment(Apartment):
         self.unit_size = unit_size
 
     def get_details(self):
-        return f"Single Apartment: {self.name}, City ID: {self.city_id}, Size: {self.unit_size} sq ft" 
+        return f"Single Apartment: {self.name}, City ID: {self.city_id}, Size: {self.unit_size} sq ft"
+class DoubleApartment(Apartment):
+    def __init__(self, name, city_id, unit_sizes):
+        super().__init__(name, city_id, 2)  # Double Apartment has 2 units
+        self.unit_sizes = unit_sizes  # List of sizes for the two units
+
+    def get_details(self):
+        return f"Double Apartment: {self.name}, City ID: {self.city_id}, Sizes: {self.unit_sizes}"
