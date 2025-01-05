@@ -39,3 +39,11 @@ class DoubleApartment(Apartment):
 
     def get_details(self):
         return f"Double Apartment: {self.name}, City ID: {self.city_id}, Sizes: {self.unit_sizes}"
+class Penthouse(Apartment):
+    def __init__(self, name, city_id, number_of_units, luxury_amenities, premium_price):
+        super().__init__(name, city_id, number_of_units)
+        self.luxury_amenities = luxury_amenities  # List of luxury amenities
+        self.premium_price = premium_price  # Extra price for the penthouse
+
+    def get_details(self):
+        return f"Penthouse: {self.name}, City ID: {self.city_id}, Units: {self.number_of_units}, Luxury Amenities: {', '.join(self.luxury_amenities)}, Premium Price: {self.premium_price}"
