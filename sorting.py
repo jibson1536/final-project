@@ -1,8 +1,12 @@
-# sorting.py
-def sort_hotels_by_city_id(hotels):
-    """Sort a list of hotels by their city_id."""
-    return sorted(hotels, key=lambda h: h.city_id)
+def sort_hotels_by_name(hotels, reverse=False):
+    return sorted(hotels, key=lambda hotel: hotel.name, reverse=reverse)
 
-def sort_hotels_by_name(hotels):
-    """Sort a list of hotels by their name."""
-    return sorted(hotels, key=lambda h: h.name)
+def sort_hotels_by_city_id(hotels, reverse=False):
+    return sorted(hotels, key=lambda hotel: hotel.city_id, reverse=reverse)
+
+def sort_hotels_by_custom_attribute(hotels, attribute, reverse=False):
+    try:
+        return sorted(hotels, key=lambda hotel: getattr(hotel, attribute), reverse=reverse)
+    except AttributeError:
+        print(f"Error: Attribute '{attribute}' does not exist in the hotel objects.")
+        return None
