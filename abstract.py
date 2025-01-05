@@ -51,3 +51,8 @@ class Country:
     def _init_(self, country_id, name):
         self.country_id = country_id
         self.name = name
+class City:
+    def _init_(self, city_id, name, country_id):
+        self.city_id = city_id
+        self.name = name
+        self.country_id = country_id
