@@ -18,3 +18,10 @@ class Guesthouse(Hotel):
 
     def get_details(self):
         return f"Guesthouse: {self.name}, City ID: {self.city_id}, Capacity: {self.guest_capacity}"
+class Apartment(Hotel):
+    def __init__(self, name, city_id, number_of_units):
+        super().__init__(name, city_id)
+        self.number_of_units = number_of_units
+
+def get_details(self):
+    return f"Apartment: {self.name}, City ID: {self.city_id}, Units: {self.number_of_units}"    
