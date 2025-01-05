@@ -24,4 +24,11 @@ class Apartment(Hotel):
         self.number_of_units = number_of_units
 
 def get_details(self):
-    return f"Apartment: {self.name}, City ID: {self.city_id}, Units: {self.number_of_units}"    
+    return f"Apartment: {self.name}, City ID: {self.city_id}, Units: {self.number_of_units}"   
+class SingleApartment(Apartment):
+    def __init__(self, name, city_id, unit_size):
+        super().__init__(name, city_id, 1)  # Single Apartment has only 1 unit
+        self.unit_size = unit_size
+
+    def get_details(self):
+        return f"Single Apartment: {self.name}, City ID: {self.city_id}, Size: {self.unit_size} sq ft" 
