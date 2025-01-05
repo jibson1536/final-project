@@ -47,3 +47,7 @@ class Penthouse(Apartment):
 
     def get_details(self):
         return f"Penthouse: {self.name}, City ID: {self.city_id}, Units: {self.number_of_units}, Luxury Amenities: {', '.join(self.luxury_amenities)}, Premium Price: {self.premium_price}"
+class Country:
+    def _init_(self, country_id, name):
+        self.country_id = country_id
+        self.name = name
