@@ -25,7 +25,6 @@ class MergeSort(SortingAlgorithm):
             self.sort(right_half, key, reverse)
 
             i = j = k = 0
-
             while i < len(left_half) and j < len(right_half):
                 if (left_half[i][key] < right_half[j][key]) != reverse:
                     data[k] = left_half[i]
@@ -44,4 +43,21 @@ class MergeSort(SortingAlgorithm):
                 data[k] = right_half[j]
                 j += 1
                 k += 1
+
         return data
+
+def sort_hotels(data, key, reverse=False, algorithm="bubble"):
+    """
+    Unified interface for sorting hotels.
+    :param data: List of dictionaries to sort
+    :param key: Key to sort by
+    :param reverse: Whether to sort in descending order
+    :param algorithm: Sorting algorithm to use ("bubble" or "merge")
+    :return: Sorted data
+    """
+    valid_algorithms = {"bubble": BubbleSort(), "merge": MergeSort()}
+    if algorithm not in valid_algorithms:
+        raise ValueError(f"Invalid algorithm: {algorithm}. Choose 'bubble' or 'merge'.")
+
+    sorter = valid_algorithms[algorithm]
+    return sorter.sort(data, key, reverse)
