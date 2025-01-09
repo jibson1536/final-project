@@ -24,10 +24,10 @@ class HotelBookingSystem:
     def view_hotels(self):
         """Display all hotels."""
         if not self.hotels:
-            print("No hotels available. Debug info: self.hotels is empty.")  # Debugging
+            print("No hotels available.")
             return
         for hotel in self.hotels:
-            print(hotel)
+            print(f"{hotel.name} ({hotel.location}, {hotel.city}, {hotel.country}) - ${hotel.price}/night, Rating: {hotel.rating}, Available: {hotel.availability}")
 
     def filter_hotels(self):
         """Filter hotels based on various criteria, including city and country."""
@@ -40,6 +40,7 @@ class HotelBookingSystem:
         choice = input("Enter your choice: ").strip()
 
         try:
+            results = []
             if choice == "1":
                 city_name = input("Enter city name: ").strip().lower()
                 results = [hotel for hotel in self.hotels if city_name in hotel.city.lower()]
@@ -62,12 +63,30 @@ class HotelBookingSystem:
                 print("Invalid choice.")
                 return
 
+            if not results:
+                print("No hotels found matching the filter.")
+                return
+
+            # Ask if user wants to view only available hotels
+            view_available = input("Do you want to view only available hotels? (yes/no): ").strip().lower() == "yes"
+            if view_available:
+                results = [hotel for hotel in results if hotel.availability]
+
+            # Ask if user wants to sort the results
+            sort_choice = input("Do you want to sort the results? (yes/no): ").strip().lower() == "yes"
+            if sort_choice:
+                print("\nSort Options: name, price, rating, location")
+                key = input("Enter sorting key: ").strip()
+                reverse = input("Sort in descending order? (yes/no): ").strip().lower() == "yes"
+                results = sort_hotels(results, key, reverse=reverse)
+
             if results:
                 print("\nFiltered Hotels:")
                 for hotel in results:
-                    print(hotel)
+                    print(f"{hotel.name} ({hotel.location}, {hotel.city}, {hotel.country}) - ${hotel.price}/night, Rating: {hotel.rating}, Available: {hotel.availability}")
             else:
-                print("No hotels found matching the filter.")
+                print("No hotels found after applying additional filters.")
+
         except ValueError:
             print("Invalid input. Please try again.")
         except Exception as e:
