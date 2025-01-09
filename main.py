@@ -1,12 +1,12 @@
 import os
-from Data_handling import DataHandler, DataItem
+from data_handling import DataHandler, DataItem
 from accounts import AccountManager
 from sorting_algorithms import sort_hotels
 from utilities import save_to_csv
 from truth_tables import TruthTableEvaluator  # Re-added truth tables
 
 class HotelBookingSystem:
-    def __init__(self, data_file):
+    def _init_(self, data_file):
         self.data_file = data_file
         self.hotels = self.load_hotels()
         self.bookings = []
@@ -15,11 +15,8 @@ class HotelBookingSystem:
     def load_hotels(self):
         """Load hotels using DataHandler."""
         data = DataHandler.load_data(self.data_file)  # Ensure this returns dictionaries
-        if data and all(isinstance(row, dict) for row in data):
-            hotels = [DataItem(**row) for row in data]  # Convert dictionaries to DataItem objects
-            return hotels
-        else:
-            raise TypeError("DataHandler.load_data() must return a list of dictionaries.")
+        hotels = [DataItem(**row) for row in data]  # Convert dictionaries to DataItem objects
+        return hotels
 
     def view_hotels(self):
         """Display all hotels."""
@@ -27,7 +24,7 @@ class HotelBookingSystem:
             print("No hotels available.")
             return
         for hotel in self.hotels:
-            print(f"{hotel.name} ({hotel.location}, {hotel.city}, {hotel.country}) - ${hotel.price}/night, Rating: {hotel.rating}, Available: {hotel.availability}")
+            print(hotel)
 
     def filter_hotels(self):
         """Filter hotels based on various criteria, including city and country."""
@@ -57,36 +54,34 @@ class HotelBookingSystem:
             elif choice == "5":
                 expression = input("Enter logical expression (e.g., price < 100 and rating > 4.5): ").strip()
                 formatted_expression = TruthTableEvaluator.format_expression(expression)
-                results = TruthTableEvaluator.filter_data([hotel.__dict__ for hotel in self.hotels], formatted_expression)
+                results = TruthTableEvaluator.filter_data(
+                    [hotel._dict_ for hotel in self.hotels], formatted_expression
+                )
                 results = [DataItem(**hotel) for hotel in results]  # Convert back to DataItem objects
             else:
                 print("Invalid choice.")
                 return
 
-            if not results:
-                print("No hotels found matching the filter.")
-                return
-
-            # Ask if user wants to view only available hotels
-            view_available = input("Do you want to view only available hotels? (yes/no): ").strip().lower() == "yes"
-            if view_available:
+            # Ask whether to view only available hotels
+            only_available = input("Do you want to view only available hotels? (yes/no): ").strip().lower() == "yes"
+            if only_available:
                 results = [hotel for hotel in results if hotel.availability]
 
-            # Ask if user wants to sort the results
+            # Ask whether to sort the results
             sort_choice = input("Do you want to sort the results? (yes/no): ").strip().lower() == "yes"
-            if sort_choice:
+            if sort_choice and results:
                 print("\nSort Options: name, price, rating, location")
                 key = input("Enter sorting key: ").strip()
                 reverse = input("Sort in descending order? (yes/no): ").strip().lower() == "yes"
                 results = sort_hotels(results, key, reverse=reverse)
 
+            # Display results
             if results:
                 print("\nFiltered Hotels:")
                 for hotel in results:
-                    print(f"{hotel.name} ({hotel.location}, {hotel.city}, {hotel.country}) - ${hotel.price}/night, Rating: {hotel.rating}, Available: {hotel.availability}")
+                    print(hotel)
             else:
-                print("No hotels found after applying additional filters.")
-
+                print("No hotels found matching the filter.")
         except ValueError:
             print("Invalid input. Please try again.")
         except Exception as e:
@@ -135,7 +130,7 @@ class HotelBookingSystem:
                 return
         print("Hotel not found.")
 
-if __name__ == "__main__":
+if __name__ == "_main_":
     data_file = "hotels.csv"
     system = HotelBookingSystem(data_file)
 
