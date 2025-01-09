@@ -1,21 +1,51 @@
-HotelName,Price,Rating,Location
-Hotel Sunshine,100.0,4.5,New York
-The Grand Plaza,250.0,5.0,Los Angeles
-Budget Inn,50.0,3.0,San Francisco
-Seaside Resort,200.0,4.0,Miami
-Mountain Lodge,150.0,4.2,Aspen
-Urban Stay,120.0,4.1,Chicago
-Royal Inn,300.0,5.0,Boston
-The Cozy Nook,75.0,3.5,Portland
-Luxury Haven,500.0,5.0,Las Vegas
-Beachside Escape,220.0,4.8,Honolulu
-The Hidden Gem,95.0,3.9,Austin
-Lakeview Retreat,180.0,4.4,Seattle
-The Green Stay,80.0,3.7,Denver
-City Central,140.0,4.3,Phoenix
-Sunset Inn,60.0,3.2,San Diego
-Downtown Suites,230.0,4.7,Houston
-The Comfort Zone,110.0,4.0,Philadelphia
-Riverside Hotel,125.0,4.1,Atlanta
-The Modern Stay,210.0,4.6,Dallas
-The Grand Escape,400.0,5.0,Orlando
+hotel_id,name,location,price,rating,city,country,availability
+1,Green House,Downtown,50.0,3.0,New York,USA,False
+2,Blue Lagoon,Coastal Area,65.3,3.4,Sydney,Australia,True
+3,Royal Inn,City Center,80.6,3.8,London,UK,False
+4,Mountain View,Hilltop,95.9,4.2,Aspen,USA,True
+5,Ocean Breeze,Beachfront,111.2,4.6,Maldives,Maldives,False
+6,Golden Sands,Desert Oasis,126.5,3.0,Dubai,UAE,True
+7,Snowy Retreat,Mountain Base,141.8,3.4,Banff,Canada,False
+8,City Lux,Downtown,157.1,3.8,Tokyo,Japan,True
+9,Historic Haven,Old Town,172.4,4.2,Paris,France,False
+10,Nature's Bliss,Countryside,187.7,4.6,Zurich,Switzerland,True
+11,Green House,Downtown,203.0,3.0,New York,USA,False
+12,Blue Lagoon,Coastal Area,218.3,3.4,Sydney,Australia,True
+13,Royal Inn,City Center,233.6,3.8,London,UK,False
+14,Mountain View,Hilltop,248.9,4.2,Aspen,USA,True
+15,Ocean Breeze,Beachfront,264.2,4.6,Maldives,Maldives,False
+16,Golden Sands,Desert Oasis,279.5,3.0,Dubai,UAE,True
+17,Snowy Retreat,Mountain Base,294.8,3.4,Banff,Canada,False
+18,City Lux,Downtown,310.1,3.8,Tokyo,Japan,True
+19,Historic Haven,Old Town,325.4,4.2,Paris,France,False
+20,Nature's Bliss,Countryside,340.7,4.6,Zurich,Switzerland,True
+21,Green House,Downtown,356.0,3.0,New York,USA,False
+22,Blue Lagoon,Coastal Area,371.3,3.4,Sydney,Australia,True
+23,Royal Inn,City Center,386.6,3.8,London,UK,False
+24,Mountain View,Hilltop,401.9,4.2,Aspen,USA,True
+25,Ocean Breeze,Beachfront,417.2,4.6,Maldives,Maldives,False
+26,Golden Sands,Desert Oasis,432.5,3.0,Dubai,UAE,True
+27,Snowy Retreat,Mountain Base,447.8,3.4,Banff,Canada,False
+28,City Lux,Downtown,463.1,3.8,Tokyo,Japan,True
+29,Historic Haven,Old Town,478.4,4.2,Paris,France,False
+30,Nature's Bliss,Countryside,493.7,4.6,Zurich,Switzerland,True
+31,Green House,Downtown,509.0,3.0,New York,USA,False
+32,Blue Lagoon,Coastal Area,524.3,3.4,Sydney,Australia,True
+33,Royal Inn,City Center,539.6,3.8,London,UK,False
+34,Mountain View,Hilltop,554.9,4.2,Aspen,USA,True
+35,Ocean Breeze,Beachfront,570.2,4.6,Maldives,Maldives,False
+36,Golden Sands,Desert Oasis,585.5,3.0,Dubai,UAE,True
+37,Snowy Retreat,Mountain Base,600.8,3.4,Banff,Canada,False
+38,City Lux,Downtown,616.1,3.8,Tokyo,Japan,True
+39,Historic Haven,Old Town,631.4,4.2,Paris,France,False
+40,Nature's Bliss,Countryside,646.7,4.6,Zurich,Switzerland,True
+41,Green House,Downtown,662.0,3.0,New York,USA,False
+42,Blue Lagoon,Coastal Area,677.3,3.4,Sydney,Australia,True
+43,Royal Inn,City Center,692.6,3.8,London,UK,False
+44,Mountain View,Hilltop,707.9,4.2,Aspen,USA,True
+45,Ocean Breeze,Beachfront,723.2,4.6,Maldives,Maldives,False
+46,Golden Sands,Desert Oasis,738.5,3.0,Dubai,UAE,True
+47,Snowy Retreat,Mountain Base,753.8,3.4,Banff,Canada,False
+48,City Lux,Downtown,769.1,3.8,Tokyo,Japan,True
+49,Historic Haven,Old Town,784.4,4.2,Paris,France,False
+50,Nature's Bliss,Countryside,799.7,4.6,Zurich,Switzerland,True
