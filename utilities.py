@@ -9,13 +9,25 @@ def format_display(hotels):
     for hotel in hotels:
         print(f"{hotel['HotelName']} - Price: ${hotel['Price']}, Rating: {hotel['Rating']}/5, Location: {hotel['Location']}")
 
-def save_to_csv(data, file_name):
-    """Save filtered/sorted data to a CSV file."""
+import os
+
+def save_to_csv(data, file_path):
     try:
-        with open(file_name, mode='w', newline='') as file:
-            writer = csv.DictWriter(file, fieldnames=["HotelName", "Price", "Rating", "Location"])
-            writer.writeheader()
+        # Ensure the file path exists
+        file_exists = os.path.isfile(file_path)
+
+        # Get the headers dynamically from the first item's keys
+        headers = data[0].keys() if data else []
+
+        with open(file_path, mode="w", newline="") as file:
+            writer = csv.DictWriter(file, fieldnames=headers)
+
+            # Write the header only if the file doesn't exist
+            if not file_exists:
+                writer.writeheader()
+
+            # Write all data
             writer.writerows(data)
-        print(f"Results saved to {file_name}")
+
     except Exception as e:
         print(f"Error saving file: {e}")
